@@ -6,6 +6,10 @@ defmodule Exlivery.Orders.Agent do
     Agent.start_link(fn -> %{} end, name: __MODULE__)
   end
 
+  def list_all do
+    Agent.get(__MODULE__, & &1)
+  end
+
   def save(%Order{} = order) do
     uuid = UUID.uuid4()
     Agent.update(__MODULE__, &update_state(&1,order, uuid))
