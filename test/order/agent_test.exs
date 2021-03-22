@@ -22,11 +22,15 @@ defmodule Exlivery.Orders.AgentTest do
         :ok
       end
 
-      test "saves the order" do
+      test "gets an order with a given uuid" do
         order = build(:order)
         {:ok, uuid} = OrderAgent.save(order)
         expected_response = {:ok, order}
         assert OrderAgent.get(uuid) == expected_response
+      end
+
+      test "returns an error if order not found" do
+       assert OrderAgent.get("112233") == {:error, "Order cannot be found"}
       end
     end
 end
