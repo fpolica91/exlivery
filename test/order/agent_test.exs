@@ -25,12 +25,7 @@ defmodule Exlivery.Orders.AgentTest do
       test "saves the order" do
         order = build(:order)
         {:ok, uuid} = OrderAgent.save(order)
-        expected_response = {:ok,
-           %Order{delivery_address: "112 hopkins drive",
-           items: [%Item{category: :pizza, description: "Vegan Pizza", qty: 1, unit_price: Decimal.new("50.00")},
-           %Item{category: :pizza, description: "tuna sushi", qty: 1, unit_price: "12.00"}
-           ], total_price: Decimal.new("62.00"), user_cpf: "2324252"}
-          }
+        expected_response = {:ok, order}
         assert OrderAgent.get(uuid) == expected_response
       end
     end
